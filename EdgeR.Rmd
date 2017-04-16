@@ -51,7 +51,7 @@ wasps_table=wasps_table[1:11506,]
 ### Runint edge for DE genes
 wasps_d=DGEList(count=wasps_table,group=replicates)
 cpm.wasps_d <- cpm(wasps_d)
-cpm.wasps_d
+#cpm.wasps_d
 
 ###Filtering gene with low read counts. 
 wasps_d <- wasps_d[ rowSums(cpm.wasps_d>3) >=3,]
@@ -180,9 +180,9 @@ overall.table[names.overlap2,9]=SandNW.overlap[,9]
 overall.table=rbind(overall.table,SandNW.nonoverlap)
 
 ## rayna's
-colnames(wasps_table)=c("G1","G2","G3","G4","G5","NW1","NW2","NW3","NW4","NW5","S1","S2","S3","S4")
+colnames(wasps_table)=c("G1","G2","G3","G4","G5","W1","W2","W3","W4","W5","S1","S2","S3","S4")
 colData <- as.data.frame(colnames(wasps_table))
-colData$Group <- c("G","G","G","G","G","NW","NW","NW","NW","NW","S","S","S","S")
+colData$Group <- c("Gyne","Gyne","Gyne","Gyne","Gyne","Worker","Worker","Worker","Worker","Worker","Stylopized","Stylopized","Stylopized","Stylopized")
 rownames(colData) <- colData$`colnames(wasps_table)`
 
 library(DESeq2)
@@ -197,12 +197,12 @@ dds
 rld <- rlog(dds, blind=FALSE)
 
 ## contrast DEGS
-contrast1 <- resvals(contrastvector = c('Group', 'G', 'NW'), mypval = 0.1)
-contrast2 <- resvals(contrastvector = c('Group', 'G', 'S'), mypval = 0.1)
-contrast3 <- resvals(contrastvector = c('Group', 'NW', 'S'), mypval = 0.1)
-myhistogram(contrastvector = c('Group', 'G', 'NW'), mypval = 0.1)
-myhistogram(contrastvector = c('Group', 'G', 'S'), mypval = 0.1)
-myhistogram(contrastvector = c('Group', 'NW', 'S'), mypval = 0.1)
+contrast1 <- resvals(contrastvector = c('Group', 'Gyne', 'Worker'), mypval = 0.1)
+contrast2 <- resvals(contrastvector = c('Group', 'Gyne', 'Stylopized'), mypval = 0.1)
+contrast3 <- resvals(contrastvector = c('Group', 'Worker', 'Stylopized'), mypval = 0.1)
+myhistogram(contrastvector = c('Group', 'Gyne', 'Worker'), mypval = 0.1)
+myhistogram(contrastvector = c('Group', 'Gyne', 'Stylopized'), mypval = 0.1)
+myhistogram(contrastvector = c('Group', 'Worker', 'Stylopized'), mypval = 0.1)
 rldpvals <- assay(rld)
 rldpvals <- cbind(rldpvals, contrast1, contrast2, contrast3)
 rldpvals <- as.data.frame(rldpvals)
@@ -212,13 +212,13 @@ venn2 <- row.names(rldpvals[rldpvals[4] <0.1 & !is.na(rldpvals[4]),])
 venn3 <- row.names(rldpvals[rldpvals[6] <0.1 & !is.na(rldpvals[6]),])
 venn12 <- union(venn1,venn2)
 venn123 <- union(venn12,venn3)
-candidates <- list("G-NW" = venn1, "G-S" = venn2,"NW-S" = venn3)
+candidates <- list("Gyne-Worker" = venn1, "Gyne-Stylopized" = venn2,"Worker-Stylopized" = venn3)
 
 prettyvenn <- venn.diagram(
   scaled=T,
   x = candidates, filename=NULL, 
   col = "black",
-  fill = c( "white", "white", "white"),
+  fill = c( "blue", "yellow", "green"),
   alpha = 0.5,
   cex = 1, fontfamily = "sans", #fontface = "bold",
   cat.default.pos = "text",
@@ -234,7 +234,7 @@ DEGes <- assay(rld)
 DEGes <- cbind(DEGes, contrast1, contrast2, contrast3)
 DEGes <- as.data.frame(DEGes) # convert matrix to dataframe
 DEGes$rownames <- rownames(DEGes)  # add the rownames to the dataframe
-DEGes$padjmin <- with(DEGes, pmin(padjGroupGNW, padjGroupGS ,padjGroupNWS)) # put the min pvalue in a new column
+DEGes$padjmin <- with(DEGes, pmin(padjGroupGyneWorker, padjGroupGyneStylopized ,padjGroupWorkerStylopized)) # put the min pvalue in a new column
 DEGes <- DEGes %>% filter(padjmin < 0.1)
 rownames(DEGes) <- DEGes$rownames
 drop.cols <-colnames(DEGes[,grep("padj|pval|rownames", colnames(DEGes))])
@@ -245,9 +245,9 @@ paletteLength <- 30
 colorpalette <-  colorRampPalette(c("Deep Sky Blue 3", "white", "red"))( 30 )
 myBreaks <- c(seq(min(DEGes), 0, length.out=ceiling(paletteLength/2) + 1), 
               seq(max(DEGes)/paletteLength, max(DEGes), length.out=floor(paletteLength/2)))
+
 pheatmap(DEGes, show_colnames=T, show_rownames = F,
          treeheight_row = 0, treeheight_col = 25,
-         #annotation_col=df, annotation_colors = ann_colors,
          fontsize = 12, fontsize_row = 7, 
          #cellwidth = 10, 
          border_color = "grey60" ,
