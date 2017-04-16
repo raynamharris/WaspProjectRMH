@@ -1,5 +1,3 @@
-    ## [1] "Reading input files finished!"
-
     ## [1] 11511
 
     ## Disp = 0.08861 , BCV = 0.2977
@@ -31,14 +29,20 @@
     ## colnames(14): G1 G2 ... S3 S4
     ## colData names(3): colnames(wasps_table) Group sizeFactor
 
-    ## [1] 2260
-    ## [1] 606
+    ## [1] "Gyne vs Worker DEGS (p=0.05, uncorrected & corrected"
 
-    ## [1] 1595
-    ## [1] 149
+    ## [1] 1560
+    ## [1] 362
 
-    ## [1] 733
-    ## [1] 43
+    ## [1] "Gyne vs Stylopized DEGS (p=0.05, uncorrected & corrected"
+
+    ## [1] 1010
+    ## [1] 93
+
+    ## [1] "Stylopized vs Worker DEGS (p=0.05, uncorrected & corrected"
+
+    ## [1] 421
+    ## [1] 35
 
 ![](EdgeR_files/figure-markdown_strict/everything-2.png)
 
@@ -48,6 +52,9 @@
 
     ## [1] 1
 
+![](EdgeR_files/figure-markdown_strict/everything-4.png)
+
     ## [1] 1
 
-![](EdgeR_files/figure-markdown_strict/everything-4.png)![](EdgeR_files/figure-markdown_strict/everything-5.png)![](EdgeR_files/figure-markdown_strict/everything-6.png)![](EdgeR_files/figure-markdown_strict/everything-7.png)![](EdgeR_files/figure-markdown_strict/everything-8.png)
+    ## null device 
+    ##           1

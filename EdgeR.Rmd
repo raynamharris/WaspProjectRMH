@@ -29,7 +29,7 @@ NW3=read.table("BFAST-NW3-r1.0.txt")
 NW4=read.table("BFAST-NW4-r1.0.txt")
 NW5=read.table("BFAST-NW5-r1.0.txt")
 
-print( "Reading input files finished!")
+# print( "Reading input files finished!")
 
 ### creating input for edgeR
 wasps_table=cbind(G1,G2,G3,G4,G5,NW1,NW2,NW3,NW4,NW5,S1,S2,S3,S4)
@@ -197,12 +197,15 @@ dds
 rld <- rlog(dds, blind=FALSE)
 
 ## contrast DEGS
-contrast1 <- resvals(contrastvector = c('Group', 'Gyne', 'Worker'), mypval = 0.1)
-contrast2 <- resvals(contrastvector = c('Group', 'Gyne', 'Stylopized'), mypval = 0.1)
-contrast3 <- resvals(contrastvector = c('Group', 'Worker', 'Stylopized'), mypval = 0.1)
-myhistogram(contrastvector = c('Group', 'Gyne', 'Worker'), mypval = 0.1)
-myhistogram(contrastvector = c('Group', 'Gyne', 'Stylopized'), mypval = 0.1)
-myhistogram(contrastvector = c('Group', 'Worker', 'Stylopized'), mypval = 0.1)
+print( "Gyne vs Worker DEGS (p=0.05, uncorrected & corrected")
+contrast1 <- resvals(contrastvector = c('Group', 'Gyne', 'Worker'), mypval = 0.05)
+print( "Gyne vs Stylopized DEGS (p=0.05, uncorrected & corrected")
+contrast2 <- resvals(contrastvector = c('Group', 'Gyne', 'Stylopized'), mypval = 0.05)
+print( "Stylopized vs Worker DEGS (p=0.05, uncorrected & corrected")
+contrast3 <- resvals(contrastvector = c('Group', 'Worker', 'Stylopized'), mypval = 0.05)
+myhistogram(contrastvector = c('Group', 'Gyne', 'Worker'), mypval = 0.05)
+myhistogram(contrastvector = c('Group', 'Gyne', 'Stylopized'), mypval = 0.05)
+myhistogram(contrastvector = c('Group', 'Worker', 'Stylopized'), mypval = 0.05)
 rldpvals <- assay(rld)
 rldpvals <- cbind(rldpvals, contrast1, contrast2, contrast3)
 rldpvals <- as.data.frame(rldpvals)
@@ -224,7 +227,7 @@ prettyvenn <- venn.diagram(
   cat.default.pos = "text",
   cat.dist = c(0.08, 0.08, 0.08), cat.pos = 1,
   cat.cex = 1, cat.fontfamily = "sans")
-#dev.off()
+dev.off()
 grid.draw(prettyvenn)
 
 #heatmap
