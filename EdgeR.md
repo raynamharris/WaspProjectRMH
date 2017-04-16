@@ -17,7 +17,7 @@
     ## 0  8394
     ## 1    60
 
-![](EdgeR_files/figure-markdown_strict/everything-1.png)
+![](./figures/theirvenn-1.png)
 
     ## class: DESeqDataSet 
     ## dim: 8484 14 
@@ -44,16 +44,20 @@
     ## [1] 421
     ## [1] 35
 
-![](EdgeR_files/figure-markdown_strict/everything-2.png)
+![](./figures/DESeq2-1.png)
 
     ## [1] 1
 
-![](EdgeR_files/figure-markdown_strict/everything-3.png)
+![](./figures/DESeq2-2.png)
 
     ## [1] 1
 
-![](EdgeR_files/figure-markdown_strict/everything-4.png)
+![](./figures/DESeq2-3.png)
 
     ## [1] 1
 
-![](EdgeR_files/figure-markdown_strict/everything-5.png)![](EdgeR_files/figure-markdown_strict/everything-6.png)![](EdgeR_files/figure-markdown_strict/everything-7.png)![](EdgeR_files/figure-markdown_strict/everything-8.png)![](EdgeR_files/figure-markdown_strict/everything-9.png)
+![](./figures/myVenn-1.png)
+
+![](./figures/heatmap-1.png)
+
+![](./figures/PCA-1.png)![](./figures/PCA-2.png)![](./figures/PCA-3.png)

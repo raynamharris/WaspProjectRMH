@@ -5,8 +5,9 @@ date: "April 16, 2017"
 output: md_document
 ---
 
-```{r everything, message=F, echo=F, warning=F}
+```{r setup, message=F, echo=F, warning=F}
 source("functions.R")
+knitr::opts_chunk$set(fig.path = './figures/')
 
 #source("http://bioconductor.org/biocLite.R")
 #biocLite("edgeR")
@@ -30,7 +31,9 @@ NW4=read.table("BFAST-NW4-r1.0.txt")
 NW5=read.table("BFAST-NW5-r1.0.txt")
 
 # print( "Reading input files finished!")
+```
 
+```{r edgeR, message=F, echo=F, warning=F}
 ### creating input for edgeR
 wasps_table=cbind(G1,G2,G3,G4,G5,NW1,NW2,NW3,NW4,NW5,S1,S2,S3,S4)
 wasps_table=wasps_table[,c(1,2,4,6,8,10,12,14,16,18,20,22,24,26,28)]
@@ -79,12 +82,10 @@ SandG=topTags(wasps_et, n=90)
 #write.table(NWandG,file="SandNW.txt", quote=F, sep="\t")
 #write.table(SandG,file="SandG.txt", quote=F, sep="\t")
 #write.table(SandNW,file="SandNW.txt", quote=F, sep="\t")
+```
 
 
-
-##################
-### Venn Diagram############
-################
+```{r theirvenn, message=F, echo=F, warning=F}
 require(VennDiagram)
 require(RColorBrewer)
 
@@ -102,14 +103,7 @@ venn.plot = draw.triple.venn(area1=305,
 )
 grid.draw(venn.plot)
 
-
-### The rest of the code generated two excel files. 
-
-### expressed_gene_lists.xlsx shows the everage reads counts for three groups: 
-### Normal Workers (NW),  Stylopized Workers (SW) and Gynes(G)
-
-### overall_DEG_list_addFDR.xlsx lists all differential expressed genes between the 3 comparisons
-### NW <->SW,   SW <->G,  G<-> NW.
+# Normal Workers (W),  Stylopized Workers (S) and Gynes(G)
 
 colnames(wasps_table)=c("G","G","G","G","G","NW","NW","NW","NW","NW","S","S","S","S")
 t_table=t(wasps_table)### talbe transpose for using aggregate
@@ -179,7 +173,11 @@ overall.table[names.overlap2,6]=SandNW.overlap[,6]
 overall.table[names.overlap2,9]=SandNW.overlap[,9]
 overall.table=rbind(overall.table,SandNW.nonoverlap)
 
-## rayna's
+```
+
+```{r DESeq2, message=F, echo=F, warning=F}
+
+## rayna's anlaysis
 colnames(wasps_table)=c("G1","G2","G3","G4","G5","W1","W2","W3","W4","W5","S1","S2","S3","S4")
 colData <- as.data.frame(colnames(wasps_table))
 colData$Group <- c("Gyne","Gyne","Gyne","Gyne","Gyne","Worker","Worker","Worker","Worker","Worker","Stylopized","Stylopized","Stylopized","Stylopized")
@@ -210,6 +208,9 @@ rldpvals <- assay(rld)
 rldpvals <- cbind(rldpvals, contrast1, contrast2, contrast3)
 rldpvals <- as.data.frame(rldpvals)
 rldpvals <- rldpvals[ , grepl( "padj|pval" , names( rldpvals ) ) ]
+```
+
+```{r myVenn, message=F, echo=F, warning=F}
 venn1 <- row.names(rldpvals[rldpvals[2] <0.1 & !is.na(rldpvals[2]),])
 venn2 <- row.names(rldpvals[rldpvals[4] <0.1 & !is.na(rldpvals[4]),])
 venn3 <- row.names(rldpvals[rldpvals[6] <0.1 & !is.na(rldpvals[6]),])
@@ -229,7 +230,9 @@ prettyvenn <- venn.diagram(
   cat.cex = 1, cat.fontfamily = "sans")
 plot.new()
 grid.draw(prettyvenn)
+```
 
+```{r heatmap, message=F, echo=F, warning=F}
 #heatmap
 library(dplyr)
 library(pheatmap)
@@ -260,7 +263,9 @@ pheatmap(DEGes, show_colnames=T, show_rownames = F,
          clustering_method="average"
 )
 
-## pca
+```
+
+```{r PCA, message=F, echo=F, warning=F}
 library(genefilter)
 library(ggplot2)
 pcadata <- pcadataframe(rld, intgroup=c("Group"), returnData=TRUE)
@@ -272,5 +277,4 @@ ggplot(pcadata, aes(x=PC3,y=PC4, color=Group)) + geom_point(size=3) +
   stat_ellipse(level = 0.95, (aes(color=Group)), size=1) 
 ggplot(pcadata, aes(x=PC5,y=PC6, color=Group)) + geom_point(size=3) +
   stat_ellipse(level = 0.95, (aes(color=Group)), size=1) 
-
 ```
