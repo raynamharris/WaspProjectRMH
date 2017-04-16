@@ -56,5 +56,4 @@
 
     ## [1] 1
 
-    ## null device 
-    ##           1
+![](EdgeR_files/figure-markdown_strict/everything-5.png)![](EdgeR_files/figure-markdown_strict/everything-6.png)![](EdgeR_files/figure-markdown_strict/everything-7.png)![](EdgeR_files/figure-markdown_strict/everything-8.png)![](EdgeR_files/figure-markdown_strict/everything-9.png)
