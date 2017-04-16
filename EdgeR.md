@@ -1,7 +1,3 @@
-    ## Warning: package 'edgeR' was built under R version 3.3.2
-
-    ## Warning: package 'limma' was built under R version 3.3.2
-
     ## [1] "Reading input files finished!"
 
     ## [1] 11511
@@ -24,17 +20,6 @@
     ## 1    60
 
 ![](EdgeR_files/figure-markdown_strict/everything-1.png)
-
-    ## Warning: package 'DESeq2' was built under R version 3.3.2
-
-    ## Warning: package 'S4Vectors' was built under R version 3.3.2
-
-    ## Warning: package 'GenomicRanges' was built under R version 3.3.2
-
-    ## Warning: package 'GenomeInfoDb' was built under R version 3.3.2
-
-    ## Warning in DESeqDataSet(se, design = design, ignoreRank): some variables in
-    ## design formula are characters, converting to factors
 
     ## class: DESeqDataSet 
     ## dim: 8484 14 
@@ -65,8 +50,4 @@
 
     ## [1] 1
 
-![](EdgeR_files/figure-markdown_strict/everything-4.png)![](EdgeR_files/figure-markdown_strict/everything-5.png)
-
-    ## Warning: package 'ggplot2' was built under R version 3.3.2
-
-![](EdgeR_files/figure-markdown_strict/everything-6.png)![](EdgeR_files/figure-markdown_strict/everything-7.png)![](EdgeR_files/figure-markdown_strict/everything-8.png)
+![](EdgeR_files/figure-markdown_strict/everything-4.png)![](EdgeR_files/figure-markdown_strict/everything-5.png)![](EdgeR_files/figure-markdown_strict/everything-6.png)![](EdgeR_files/figure-markdown_strict/everything-7.png)![](EdgeR_files/figure-markdown_strict/everything-8.png)

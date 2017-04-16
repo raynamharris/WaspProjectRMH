@@ -5,7 +5,7 @@ date: "April 16, 2017"
 output: md_document
 ---
 
-```{r everything, message=F, echo=F}
+```{r everything, message=F, echo=F, warning=F}
 source("functions.R")
 
 #source("http://bioconductor.org/biocLite.R")
@@ -88,7 +88,7 @@ SandG=topTags(wasps_et, n=90)
 require(VennDiagram)
 require(RColorBrewer)
 
-colors <- brewer.pal(3, "BuPu")
+colors <- c( "blue", "yellow", "green")
 cat.colors = brewer.pal(3,"Set1")
 venn.plot = draw.triple.venn(area1=305, 
                              area2=51, 
