@@ -5,7 +5,7 @@ date: "April 16, 2017"
 output: md_document
 ---
 
-```{r everything}
+```{r everything, message=F, echo=F}
 source("functions.R")
 
 #source("http://bioconductor.org/biocLite.R")
