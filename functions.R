@@ -61,7 +61,6 @@ plotPCs <- function(df, xcol, ycol, aescolor, colorname, aesshape, shapename, co
     xlab(paste0("PC", xcol, ": ", percentVar[xcol],"% variance")) +
     ylab(paste0("PC", ycol, ": ", percentVar[ycol],"% variance")) +
     theme_classic() +
-    #stat_ellipse(level = 0.95, (aes(color=aescolor)),size=1) + 
     scale_colour_manual(name=colorname, values=c(colorvalues))+
     scale_shape_discrete(name=shapename) +
     theme(axis.text = element_text(size=12),
